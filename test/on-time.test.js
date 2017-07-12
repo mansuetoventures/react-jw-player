@@ -28,6 +28,14 @@ function createMockComponent() {
         results.onNinetyFivePercentCalled = true;
         results.onNinetyFivePercentArgs = event;
       },
+      onOneHundredPercent(event) {
+        results.onOneHundredPercentCalled = true;
+        results.onOneHundredPercentArgs = event;
+      },
+      onEverySecond(event) {
+        results.onEverySecondCalled = true;
+        results.onEverySecondArgs = event;
+      },
     }),
     results,
   };
@@ -38,7 +46,7 @@ test('eventHandlers.onTime() when video position is less than 3', (t) => {
 
   const mockEvent = {
     duration: 100,
-    position: 3,
+    position: 2.9999,
   };
   const onTime = createEventHandlers(mockComponent).onTime;
 
@@ -85,7 +93,7 @@ test('eventHandlers.onTime() when video position is between 3 and 10', (t) => {
   mockEvent.position = 8;
 
   t.doesNotThrow(onTime.bind(null, mockEvent), 'it runs without error one second later');
-  t.equal(mockComponent.state, currentState, 'it does not change component state a second time');
+  t.equal(mockComponent.state.hasFired, currentState.hasFired, 'hasFired in state does is not modified one second later');
   t.notOk(
     results.onThreeSecondsCalled,
     'it does not call the onThreeSeconds() prop a second time',
@@ -140,7 +148,7 @@ test('eventHandlers.onTime() when video position is between 10 and 30', (t) => {
   mockEvent.position = 12;
 
   t.doesNotThrow(onTime.bind(null, mockEvent), 'it runs without error one second later');
-  t.equal(mockComponent.state, currentState, 'it does not change component state a second time');
+  t.equal(mockComponent.state.hasFired, currentState.hasFired, 'hasFired in state does is not modified one second later');
   t.notOk(
     results.onThreeSecondsCalled,
     'it does not call the onThreeSeconds() prop a second time',
@@ -197,7 +205,7 @@ test('eventHandlers.onTime() when video position is above 30 seconds', (t) => {
   mockEvent.position = 32;
 
   t.doesNotThrow(onTime.bind(null, mockEvent), 'it runs without error one second later');
-  t.equal(mockComponent.state, currentState, 'it does not change component state a second time');
+  t.equal(mockComponent.state.hasFired, currentState.hasFired, 'hasFired in state does is not modified one second later');
   t.notOk(
     results.onThreeSecondsCalled,
     'it does not call the onThreeSeconds() prop a second time',
@@ -256,7 +264,7 @@ test('eventHandlers.onTime() when video position is beyond fifty percent', (t) =
   mockEvent.position = 52;
 
   t.doesNotThrow(onTime.bind(null, mockEvent), 'it runs without error one second later');
-  t.equal(mockComponent.state, currentState, 'it does not change component state a second time');
+  t.equal(mockComponent.state.hasFired, currentState.hasFired, 'hasFired in state does is not modified one second later');
   t.notOk(
     results.onThreeSecondsCalled,
     'it does not call the onThreeSeconds() prop a second time',
@@ -317,7 +325,7 @@ test('eventHandlers.onTime() when video position is beyond ninety five percent',
   mockEvent.position = 97;
 
   t.doesNotThrow(onTime.bind(null, mockEvent), 'it runs without error one second later');
-  t.equal(mockComponent.state, currentState, 'it does not change component state a second time');
+  t.equal(mockComponent.state.hasFired, currentState.hasFired, 'hasFired in state does is not modified one second later');
   t.notOk(
     results.onThreeSecondsCalled,
     'it does not call the onThreeSeconds() prop a second time',
