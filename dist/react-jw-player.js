@@ -121,7 +121,12 @@ var ReactJWPlayer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('div', { className: this.props.className, id: this.props.playerId });
+      return _react2.default.createElement('div', {
+        className: this.props.className,
+        dangerouslySetInnerHTML: {
+          __html: '<div id="' + this.props.playerId + '"></div>'
+        }
+      });
     }
   }]);
 
