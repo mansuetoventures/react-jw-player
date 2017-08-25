@@ -35,10 +35,7 @@ var _class = function () {
   _createClass(_class, [{
     key: 'possiblyMuted',
     value: function possiblyMuted(e) {
-      var state = this.player.getState();
-      if (state === 'playing') {
-        this.manuallyPaused = true;
-      }
+      this.possiblyMutedVal = true;
     }
   }, {
     key: 'playerPosition',
@@ -77,7 +74,7 @@ var _class = function () {
       }
 
       if (state === 'idle' && inView) {
-        if (!this.manuallyPaused) {
+        if (!this.possiblyMutedVal) {
           this.player.play();
         }
       }
@@ -95,7 +92,7 @@ var _class = function () {
       }
 
       if (state === 'paused' && inView) {
-        if (!this.manuallyPaused) {
+        if (!this.possiblyMutedVal) {
           this.player.pause(false);
         }
       }

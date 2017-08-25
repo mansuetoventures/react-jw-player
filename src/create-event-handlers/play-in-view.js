@@ -13,10 +13,7 @@ export default class {
   }
 
   possiblyMuted(e) {
-    const state = this.player.getState();
-    if (state === 'playing') {
-      this.manuallyPaused = true;
-    }
+    this.possiblyMutedVal = true;
   }
 
   playerPosition(playerEl) {
@@ -54,7 +51,7 @@ export default class {
     }
 
     if (state === 'idle' && inView) {
-      if (!this.manuallyPaused) {
+      if (!this.possiblyMutedVal) {
         this.player.play();
       }
     }
@@ -72,7 +69,7 @@ export default class {
     }
 
     if (state === 'paused' && inView) {
-      if (!this.manuallyPaused) {
+      if (!this.possiblyMutedVal) {
         this.player.pause(false);
       }
     }
