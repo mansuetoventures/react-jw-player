@@ -28,9 +28,19 @@ var _class = function () {
     this.throttledScrollListener = (0, _lodash2.default)(function () {
       _this.playerInView();
     }, 300);
+    this.possiblyMuted = this.possiblyMuted.bind(this);
+    this.wrapper.addEventListener('click', this.possiblyMuted);
   }
 
   _createClass(_class, [{
+    key: 'possiblyMuted',
+    value: function possiblyMuted(e) {
+      var state = this.player.getState();
+      if (state === 'playing') {
+        this.manuallyPaused = true;
+      }
+    }
+  }, {
     key: 'playerPosition',
     value: function playerPosition(playerEl) {
       if (playerEl && playerEl.getBoundingClientRect) {
@@ -67,7 +77,9 @@ var _class = function () {
       }
 
       if (state === 'idle' && inView) {
-        this.player.play();
+        if (!this.manuallyPaused) {
+          this.player.play();
+        }
       }
 
       if (state === 'idle' && !inView) {
@@ -83,7 +95,9 @@ var _class = function () {
       }
 
       if (state === 'paused' && inView) {
-        this.player.pause(false);
+        if (!this.manuallyPaused) {
+          this.player.pause(false);
+        }
       }
 
       if (state === 'paused' && !inView) {
@@ -101,6 +115,7 @@ var _class = function () {
     key: 'off',
     value: function off() {
       window.removeEventListener('scroll', this.throttledScrollListener);
+      this.wrapper.removeEventListener('click', this.possiblyMuted);
     }
   }]);
 

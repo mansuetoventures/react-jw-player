@@ -1,13 +1,22 @@
 import throttle from 'lodash.throttle';
 
 export default class {
-  constructor(player, { percentage }) {
+  constructor(player, {percentage}) {
     this.percentage = percentage || 10;
     this.player = player;
     this.wrapper = this.player.getContainer();
     this.throttledScrollListener = throttle(() => {
       this.playerInView();
     }, 300);
+    this.possiblyMuted = this.possiblyMuted.bind(this);
+    this.wrapper.addEventListener('click', this.possiblyMuted);
+  }
+
+  possiblyMuted(e) {
+    const state = this.player.getState();
+    if (state === 'playing') {
+      this.manuallyPaused = true;
+    }
   }
 
   playerPosition(playerEl) {
@@ -45,7 +54,9 @@ export default class {
     }
 
     if (state === 'idle' && inView) {
-      this.player.play();
+      if (!this.manuallyPaused) {
+        this.player.play();
+      }
     }
 
     if (state === 'idle' && !inView) {
@@ -61,7 +72,9 @@ export default class {
     }
 
     if (state === 'paused' && inView) {
-      this.player.pause(false);
+      if (!this.manuallyPaused) {
+        this.player.pause(false);
+      }
     }
 
     if (state === 'paused' && !inView) {
@@ -77,5 +90,6 @@ export default class {
 
   off() {
     window.removeEventListener('scroll', this.throttledScrollListener);
+    this.wrapper.removeEventListener('click', this.possiblyMuted);
   }
 }
