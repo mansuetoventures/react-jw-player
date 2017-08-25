@@ -56,7 +56,41 @@ var _class = function () {
       var difference = this.playerPosition(this.wrapper) + percentagePlayerHeight;
       var adjust = window.innerHeight > percentagePlayerHeight * 5 ? window.innerHeight : 100;
       var inView = difference > percentagePlayerHeight * -6 && difference < adjust;
-      return this.player.play(inView);
+      var state = this.player.getState();
+
+      if (state === 'buffering' && inView) {
+        return false;
+      }
+
+      if (state === 'buffering' && !inView) {
+        this.player.pause();
+      }
+
+      if (state === 'idle' && inView) {
+        this.player.play();
+      }
+
+      if (state === 'idle' && !inView) {
+        return false;
+      }
+
+      if (state === 'playing' && !inView) {
+        this.player.pause(true);
+      }
+
+      if (state === 'playing' && inView) {
+        return false;
+      }
+
+      if (state === 'paused' && inView) {
+        this.player.pause(false);
+      }
+
+      if (state === 'paused' && !inView) {
+        return false;
+      }
+
+      return false;
     }
   }, {
     key: 'on',
