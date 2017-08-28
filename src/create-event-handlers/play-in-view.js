@@ -47,7 +47,7 @@ export default class {
     }
 
     if (state === 'buffering' && !inView) {
-      this.player.pause();
+      // this.player.pause();
     }
 
     if (state === 'idle' && inView) {
@@ -61,7 +61,7 @@ export default class {
     }
 
     if (state === 'playing' && !inView) {
-      this.player.pause(true);
+      // this.player.pause(true);
     }
 
     if (state === 'playing' && inView) {

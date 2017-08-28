@@ -70,7 +70,7 @@ var _class = function () {
       }
 
       if (state === 'buffering' && !inView) {
-        this.player.pause();
+        // this.player.pause();
       }
 
       if (state === 'idle' && inView) {
@@ -84,7 +84,7 @@ var _class = function () {
       }
 
       if (state === 'playing' && !inView) {
-        this.player.pause(true);
+        // this.player.pause(true);
       }
 
       if (state === 'playing' && inView) {
