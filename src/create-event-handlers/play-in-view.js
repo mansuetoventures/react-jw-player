@@ -47,13 +47,13 @@ export default class {
     }
 
     if (state === 'buffering' && !inView) {
-      // this.player.pause();
+      this.player.pause();
     }
 
     if (state === 'idle' && inView) {
-      if (!this.possiblyMutedVal) {
+      // if (!this.possiblyMutedVal) {
         this.player.play();
-      }
+      // }
     }
 
     if (state === 'idle' && !inView) {
@@ -61,7 +61,7 @@ export default class {
     }
 
     if (state === 'playing' && !inView) {
-      // this.player.pause(true);
+      this.player.pause(true);
     }
 
     if (state === 'playing' && inView) {
@@ -69,9 +69,9 @@ export default class {
     }
 
     if (state === 'paused' && inView) {
-      if (!this.possiblyMutedVal) {
+      // if (!this.possiblyMutedVal) {
         this.player.pause(false);
-      }
+      // }
     }
 
     if (state === 'paused' && !inView) {
