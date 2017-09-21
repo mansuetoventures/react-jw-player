@@ -74,16 +74,16 @@ var _class = function () {
       }
 
       if (state === 'idle' && inView) {
-        // if (!this.possiblyMutedVal) {
-        this.player.play();
-        // }
+        if (!this.possiblyMutedVal) {
+          this.player.play();
+        }
       }
 
       if (state === 'idle' && !inView) {
         return false;
       }
 
-      if (state === 'playing' && !inView) {
+      if (state === 'playing' && !inView && !this.possiblyMutedVal) {
         this.player.pause(true);
       }
 
@@ -92,9 +92,9 @@ var _class = function () {
       }
 
       if (state === 'paused' && inView) {
-        // if (!this.possiblyMutedVal) {
-        this.player.pause(false);
-        // }
+        if (!this.possiblyMutedVal) {
+          this.player.pause(false);
+        }
       }
 
       if (state === 'paused' && !inView) {

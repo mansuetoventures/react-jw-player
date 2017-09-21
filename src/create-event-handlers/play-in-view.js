@@ -51,16 +51,16 @@ export default class {
     }
 
     if (state === 'idle' && inView) {
-      // if (!this.possiblyMutedVal) {
+      if (!this.possiblyMutedVal) {
         this.player.play();
-      // }
+      }
     }
 
     if (state === 'idle' && !inView) {
       return false;
     }
 
-    if (state === 'playing' && !inView) {
+    if (state === 'playing' && !inView && !this.possiblyMutedVal) {
       this.player.pause(true);
     }
 
@@ -69,9 +69,9 @@ export default class {
     }
 
     if (state === 'paused' && inView) {
-      // if (!this.possiblyMutedVal) {
+      if (!this.possiblyMutedVal) {
         this.player.pause(false);
-      // }
+      }
     }
 
     if (state === 'paused' && !inView) {
