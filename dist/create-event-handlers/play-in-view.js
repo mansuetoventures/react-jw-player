@@ -64,6 +64,9 @@ var _class = function () {
       var adjust = window.innerHeight > percentagePlayerHeight * 5 ? window.innerHeight : 100;
       var inView = difference > percentagePlayerHeight * -6 && difference < adjust;
       var state = this.player.getState();
+      console.log('!!! --- POSSIBLY MUTED VALUE ----   !!!! ', this.possiblyMutedVal);
+      console.log('!!! --- POSSIBLY inView ----   !!!! ', inView);
+      console.log('!!! --- POSSIBLY state ----   !!!! ', state);
 
       if (state === 'buffering' && inView) {
         return false;

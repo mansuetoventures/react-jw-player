@@ -59,7 +59,7 @@ export default class {
     if (state === 'idle' && !inView) {
       return false;
     }
-
+    console.log('!!! JW REACT PLAYER --- POSSIBLY MUTED VALUE ----   !!!! ', this.possiblyMutedVal);
     if (state === 'playing' && !inView && !this.possiblyMutedVal) {
       this.player.pause(true);
     }
