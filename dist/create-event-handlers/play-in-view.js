@@ -60,13 +60,12 @@ var _class = function () {
     key: 'playerInView',
     value: function playerInView() {
       var percentagePlayerHeight = this.player.getHeight() / this.percentage;
-      var difference = this.playerPosition(this.wrapper) + percentagePlayerHeight;
+      // need to call getContainer again to get correct size and position of client rect
+      // otherwise this will always return 0, and will be treated as in view
+      var difference = this.playerPosition(this.player.getContainer()) + percentagePlayerHeight;
       var adjust = window.innerHeight > percentagePlayerHeight * 5 ? window.innerHeight : 100;
       var inView = difference > percentagePlayerHeight * -6 && difference < adjust;
       var state = this.player.getState();
-      console.log('!!! --- POSSIBLY MUTED VALUE ----   !!!! ', this.possiblyMutedVal);
-      console.log('!!! --- POSSIBLY inView ----   !!!! ', inView);
-      console.log('!!! --- POSSIBLY state ----   !!!! ', state);
 
       if (state === 'buffering' && inView) {
         return false;

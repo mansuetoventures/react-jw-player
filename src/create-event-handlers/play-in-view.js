@@ -35,7 +35,9 @@ export default class {
 
   playerInView() {
     const percentagePlayerHeight = this.player.getHeight() / this.percentage;
-    const difference = this.playerPosition(this.wrapper) + percentagePlayerHeight;
+    // need to call getContainer again to get correct size and position of client rect
+    // otherwise this will always return 0, and will be treated as in view
+    const difference = this.playerPosition(this.player.getContainer()) + percentagePlayerHeight;
     const adjust = window.innerHeight > percentagePlayerHeight * 5
       ? window.innerHeight
       : 100;
@@ -59,7 +61,7 @@ export default class {
     if (state === 'idle' && !inView) {
       return false;
     }
-    console.log('!!! JW REACT PLAYER --- POSSIBLY MUTED VALUE ----   !!!! ', this.possiblyMutedVal);
+
     if (state === 'playing' && !inView && !this.possiblyMutedVal) {
       this.player.pause(true);
     }
