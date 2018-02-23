@@ -61,6 +61,11 @@ class ReactJWPlayer extends Component {
     if (this.props.playInView) {
       this.viewController = new PlayInView(this.player, this.props.playInViewPercentage);
       this.viewController.on();
+
+      this.player.on('displayClick', () => {
+        // If user initiated pause, it should remove auto scroll play functionality for that session
+        this.viewController.off();
+      });
     }
   }
 

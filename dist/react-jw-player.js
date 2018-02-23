@@ -106,6 +106,8 @@ var ReactJWPlayer = function (_Component) {
   }, {
     key: '_initialize',
     value: function _initialize() {
+      var _this2 = this;
+
       var component = this;
       var player = window.jwplayer(this.props.playerId);
       this.player = player;
@@ -116,6 +118,11 @@ var ReactJWPlayer = function (_Component) {
       if (this.props.playInView) {
         this.viewController = new _playInView2.default(this.player, this.props.playInViewPercentage);
         this.viewController.on();
+
+        this.player.on('displayClick', function () {
+          // If user initiated pause, it should remove auto scroll play functionality for that session
+          _this2.viewController.off();
+        });
       }
     }
   }, {
