@@ -1,7 +1,7 @@
 import throttle from 'lodash.throttle';
 
 export default class {
-  constructor(player, {percentage}) {
+  constructor(player, { percentage }) {
     this.percentage = percentage || 10;
     this.player = player;
     this.wrapper = this.player.getContainer();
@@ -12,7 +12,7 @@ export default class {
     this.wrapper.addEventListener('click', this.possiblyMuted);
   }
 
-  possiblyMuted(e) {
+  possiblyMuted() {
     this.possiblyMutedVal = true;
   }
 
