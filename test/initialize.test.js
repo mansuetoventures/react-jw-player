@@ -18,7 +18,6 @@ test('initialize()', (t) => {
         onBeforePlayPlayer = player;
       },
       onAdPlay: 'onAdPlay',
-      onError: 'onError',
       onFullScreen: 'onFullScreen',
       onPlay: 'onPlay',
       onMute: 'onMute',
@@ -27,9 +26,15 @@ test('initialize()', (t) => {
     },
     props: {
       onAdPause: 'onAdPause',
+      onAdSkipped: 'onAdSkipped',
+      onAdComplete: 'onAdComplete',
       onOneHundredPercent: 'onOneHundredPercent',
       onPause: 'onPause',
       onReady: 'onReady',
+      onError: 'onError',
+      onBuffer: 'onBuffer',
+      onBufferChange: 'onBufferChange',
+      onSetupError: 'onSetupError',
     },
   };
 
@@ -78,6 +83,16 @@ test('initialize()', (t) => {
   );
 
   t.equal(
+    playerFunctions.adSkipped, mockComponent.props.onAdSkipped,
+    'it sets the adSkipped event with the onAdSkipped() prop',
+  );
+
+  t.equal(
+    playerFunctions.adComplete, mockComponent.props.onAdComplete,
+    'it sets the adComplete event with the onAdComplete() prop',
+  );
+
+  t.equal(
     playerFunctions.pause, mockComponent.props.onPause,
     'it sets the pause event with the onPause() prop',
   );
@@ -88,13 +103,13 @@ test('initialize()', (t) => {
   );
 
   t.equal(
-    playerFunctions.setupError, mockComponent.eventHandlers.onError,
-    'it sets the setupError event with the onError() eventHandler',
+    playerFunctions.setupError, mockComponent.props.onSetupError,
+    'it sets the setupError event with the onError() prop',
   );
 
   t.equal(
-    playerFunctions.error, mockComponent.eventHandlers.onError,
-    'it sets the error event with the onError() eventHandler',
+    playerFunctions.error, mockComponent.props.onError,
+    'it sets the error event with the onError() prop',
   );
 
   t.equal(
@@ -125,6 +140,16 @@ test('initialize()', (t) => {
   t.equal(
     playerFunctions.time, mockComponent.eventHandlers.onTime,
     'it sets the time event with the onTime() eventHandler',
+  );
+
+  t.equal(
+    playerFunctions.buffer, mockComponent.props.onBuffer,
+    'it sets the time event with the onBuffer() eventHandler',
+  );
+
+  t.equal(
+    playerFunctions.bufferChange, mockComponent.props.onBufferChange,
+    'it sets the time event with the onBufferChange() eventHandler',
   );
 
   t.end();

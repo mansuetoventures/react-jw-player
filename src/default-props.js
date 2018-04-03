@@ -3,10 +3,12 @@ const noOp = () => {};
 const defaultProps = {
   aspectRatio: 'inherit',
   file: '',
-  isAutoPlay: false,
-  isMuted: false,
+  isAutoPlay: undefined,
+  isMuted: undefined,
   onAdPlay: noOp,
   onAdResume: noOp,
+  onAdSkipped: noOp,
+  onAdComplete: noOp,
   onEnterFullScreen: noOp,
   onExitFullScreen: noOp,
   onMute: noOp,
@@ -28,7 +30,11 @@ const defaultProps = {
   onFiftyPercent: noOp,
   onSeventyFivePercent: noOp,
   onNinetyFivePercent: noOp,
+  onTime: noOp,
+  onBuffer: noOp,
+  onBufferChange: noOp,
   playlist: '',
+  useMultiplePlayerScripts: false,
 };
 
 export default defaultProps;

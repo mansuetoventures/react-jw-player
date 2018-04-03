@@ -10,7 +10,7 @@
   * [Required Props](#required-props)
   * Optional Props
     * [Configuration](#optional-configuration-props)
-    * Event Hooks
+    * [Event Hooks](#event-hooks)
       * [Advertising](#optional-advertising-event-hook-props)
       * [Player Events](#optional-player-event-hook-props)
       * [Time Events](#optional-time-event-hook-props)
@@ -52,11 +52,11 @@ import ReactJWPlayer from 'react-jw-player';
 const playlist = [{
   file: 'https://link-to-my-video.mp4',
   image: 'https://link-to-my-poster.jpg',
-  tracks: [{ 
-    file: 'https://link-to-subtitles.vtt', 
+  tracks: [{
+    file: 'https://link-to-subtitles.vtt',
     label: 'English',
     kind: 'captions',
-    'default': true 
+    'default': true
   }],
 },
 {
@@ -137,6 +137,19 @@ These are props that modify the basic behavior of the component.
 * `licenseKey`
   * License Key as supplied in the jwplayer dashboard, under: Players > Tools > Downloads > JW Player X (Self-Hosted)
   * Type: `string`
+* `useMultiplePlayerScripts`
+  * EXPERIMENTAL - Allows you to load multiple player scripts and still load the proper configuration. Expect bugs, but report them!
+  * Type: `boolean`
+
+# Event Hooks
+
+`react-jw-player` dynamically supports all events in JW Player. Simply preface the event name with `on` and pass it in as a prop.
+
+Examples:
+* `ready` => `onReady`
+* `setupError` => `onSetupError`
+
+`react-jw-player` has layered some different functionality on some of these events, so please check the docs below if you find any unexpected behavior!
 
 ## Optional Advertising Event Hook Props
 * `onAdPause(event)`
@@ -153,6 +166,18 @@ These are props that modify the basic behavior of the component.
       * This is the event object passed back from JW Player itself.
 * `onAdResume(event)`
   * A function that is run when the user resumes playing the preroll advertisement.
+  * Type: `function`
+  * Arguments:
+    * `event`
+      * This is the event object passed back from JW Player itself.
+* `onAdSkipped(event)`
+  * A function that is run when the user skips an advertisement.
+  * Type: `function`
+  * Arguments:
+    * `event`
+      * This is the event object passed back from JW Player itself.
+* `onAdComplete(event)`
+  * A function that is run when an ad has finished playing.
   * Type: `function`
   * Arguments:
     * `event`
@@ -209,6 +234,18 @@ These are props that modify the basic behavior of the component.
       * This is the event object passed back from JW Player itself.
 * `onResume(event)`
   * A function that is run when the user plays a video after pausing it.
+  * Type: `function`
+  * Arguments:
+    * `event`
+      * This is the event object passed back from JW Player itself.
+* `onSetupError(event)`
+  * A function that is run when the player errors during setup.
+  * Type: `function`
+  * Arguments:
+    * `event`
+      * This is the event object passed back from JW Player itself.
+* `onTime(event)`
+  * A function that is run whenever the playback position gets updated.
   * Type: `function`
   * Arguments:
     * `event`
@@ -298,11 +335,16 @@ class ReactJWPlayerContainer extends React.Component {
     };
 
     this.onAdPlay = this.onAdPlay.bind(this);
+    this.onReady = this.onReady.bind(this);
     this.onVideoLoad = this.onVideoLoad.bind(this);
 
     // each instance of <ReactJWPlayer> needs a unique id.
     // we randomly generate it here and assign to the container instance.
     this.playerId = someFunctionToRandomlyGenerateId();
+  }
+  onReady(event) {
+    // interact with JW Player API here
+    const player = window.jwplayer(this.playerId);
   }
   onAdPlay(event) {
     // track the ad play here
@@ -320,6 +362,7 @@ class ReactJWPlayerContainer extends React.Component {
           playlist={this.props.playlist}
           licenseKey='your-license-key'
           onAdPlay={this.onAdPlay}
+          onReady={this.onReady}
           onVideoLoad={this.onVideoLoad}
           playerId={this.playerId} // bring in the randomly generated playerId
           playerScript='https://link-to-your-jw-player-script.js'

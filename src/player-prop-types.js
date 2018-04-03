@@ -13,6 +13,8 @@ const propTypes = {
   onAdPause: PropTypes.func,
   onAdPlay: PropTypes.func,
   onAdResume: PropTypes.func,
+  onAdSkipped: PropTypes.func,
+  onAdComplete: PropTypes.func,
   onAutoStart: PropTypes.func,
   onEnterFullScreen: PropTypes.func,
   onError: PropTypes.func,
@@ -32,12 +34,15 @@ const propTypes = {
   onTwentyFivePercent: PropTypes.func,
   onUnmute: PropTypes.func,
   onVideoLoad: PropTypes.func,
+  onBuffer: PropTypes.func,
+  onBufferChange: PropTypes.func,
   playerId: PropTypes.string.isRequired,
   playerScript: PropTypes.string.isRequired,
   playlist: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
   ]),
+  useMultiplePlayerScripts: PropTypes.bool,
 };
 
 export default propTypes;
