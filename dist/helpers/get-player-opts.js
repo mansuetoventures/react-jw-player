@@ -21,9 +21,7 @@ function getPlayerOpts(opts) {
 
   var hasAdvertising = !!generatePrerollUrl;
 
-  var playerOpts = {
-    mute: !!isMuted
-  };
+  var playerOpts = {};
 
   if (licenseKey) {
     playerOpts.key = licenseKey;
@@ -49,6 +47,10 @@ function getPlayerOpts(opts) {
 
   if (typeof isAutoPlay !== 'undefined') {
     playerOpts.autostart = !!isAutoPlay;
+  }
+
+  if (typeof isMuted !== 'undefined') {
+    playerOpts.mute = !!isMuted;
   }
 
   if (image) {

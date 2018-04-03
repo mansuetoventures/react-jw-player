@@ -8,10 +8,12 @@ var noOp = function noOp() {};
 var defaultProps = {
   aspectRatio: 'inherit',
   file: '',
-  isAutoPlay: false,
-  isMuted: false,
+  isAutoPlay: undefined,
+  isMuted: undefined,
   onAdPlay: noOp,
   onAdResume: noOp,
+  onAdSkipped: noOp,
+  onAdComplete: noOp,
   onEnterFullScreen: noOp,
   onExitFullScreen: noOp,
   onMute: noOp,
@@ -33,7 +35,11 @@ var defaultProps = {
   onFiftyPercent: noOp,
   onSeventyFivePercent: noOp,
   onNinetyFivePercent: noOp,
-  playlist: ''
+  onTime: noOp,
+  onBuffer: noOp,
+  onBufferChange: noOp,
+  playlist: '',
+  useMultiplePlayerScripts: false
 };
 
 exports.default = defaultProps;
