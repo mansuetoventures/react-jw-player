@@ -37,16 +37,19 @@ class ReactJWPlayer extends Component {
     const isUsingMultiplePlayerScripts = this.props.useMultiplePlayerScripts;
 
     if (!isUsingMultiplePlayerScripts && isJWPlayerScriptLoaded) {
+      console.log('OTPOTINOTNITPTNITOPNT AAAAA');
       this._initialize();
       return;
     }
 
     if (isUsingMultiplePlayerScripts && existingScript) {
+      console.log('OTPOTINOTNITPTNITOPNT BBBBB');
       this._initialize();
       return;
     }
 
     if (!existingScript) {
+      console.log('OTPOTINOTNITPTNITOPNT CCCCC');
       installPlayerScript({
         context: document,
         onLoadCallback: this._initialize,
@@ -54,6 +57,7 @@ class ReactJWPlayer extends Component {
         uniqueScriptId: this.uniqueScriptId,
       });
     } else {
+      console.log('OTPOTINOTNITPTNITOPNT DDDDD');
       existingScript.onload = getCurriedOnLoad(existingScript, this._initialize);
     }
   }
