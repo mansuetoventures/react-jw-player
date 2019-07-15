@@ -13,7 +13,9 @@ function getPlayerOpts(opts) {
 
   const hasAdvertising = !!generatePrerollUrl;
 
-  const playerOpts = {};
+  const playerOpts = {
+    setTimeEvents: true
+  };
 
   if (licenseKey) {
     playerOpts.key = licenseKey;
