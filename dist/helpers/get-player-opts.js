@@ -21,7 +21,9 @@ function getPlayerOpts(opts) {
 
   var hasAdvertising = !!generatePrerollUrl;
 
-  var playerOpts = {};
+  var playerOpts = {
+    setTimeEvents: true
+  };
 
   if (licenseKey) {
     playerOpts.key = licenseKey;
