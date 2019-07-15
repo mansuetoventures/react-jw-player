@@ -15,6 +15,7 @@ function getPlayerOpts(opts) {
 
   const playerOpts = {
     mute: !!isMuted,
+    setTimeEvents: true,
   };
 
   if (licenseKey) {
@@ -46,8 +47,6 @@ function getPlayerOpts(opts) {
   if (image) {
     playerOpts.image = image;
   }
-
-  playerOpts.setTimeEvents = true;
 
   return Object.assign(playerOpts, customProps);
 }
