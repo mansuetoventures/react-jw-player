@@ -47,6 +47,9 @@ function getPlayerOpts(opts) {
     playerOpts.image = image;
   }
 
+  // Global setting since multiple refs
+  playerOpts.setTimeEvents = true;
+
   return Object.assign(playerOpts, customProps);
 }
 
