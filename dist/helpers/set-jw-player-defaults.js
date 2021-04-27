@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -15,7 +15,11 @@ var setJWPlayerDefaults = function setJWPlayerDefaults(_ref) {
   if (existingConfig) {
     context.jwplayer.defaults = existingConfig;
   } else {
-    playerConfigs[playerId] = context.jwplayer.defaults;
+    if (typeof context.jwplayer === 'undefined') {
+      playerConfigs[playerId] = {};
+    } else {
+      playerConfigs[playerId] = context.jwplayer.defaults;
+    }
   }
 };
 
