@@ -7,7 +7,11 @@ const setJWPlayerDefaults = ({ context, playerId }) => {
   if (existingConfig) {
     context.jwplayer.defaults = existingConfig;
   } else {
-    playerConfigs[playerId] = context.jwplayer.defaults;
+    if (typeof context.jwplayer === 'undefined'){
+      playerConfigs[playerId] = {};  
+    }else{
+      playerConfigs[playerId] = context.jwplayer.defaults;
+    }
   }
 };
 
