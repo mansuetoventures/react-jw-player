@@ -20,6 +20,7 @@ function getPlayerOpts(opts) {
 
 
   var hasAdvertising = !!generatePrerollUrl;
+  var fallbackURL = generatePrerollUrl;
 
   var playerOpts = {
     mute: !!isMuted,
@@ -48,7 +49,7 @@ function getPlayerOpts(opts) {
       adscheduleid: 'tvI86lpF',
       schedule: [{
         offset: 'pre',
-        tag: '{fallback_ad_tag_url}'
+        tag: fallbackURL
       }],
       bids: {
         bidders: [{
