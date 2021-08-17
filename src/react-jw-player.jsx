@@ -50,7 +50,7 @@ class ReactJWPlayer extends Component {
 
   _initialize() {
     const component = this;
-    const player = window.jwplayer(this.props.playerId);
+    const player = window.jwplayer(`${this.props.playerId}`);
     this.player = player;
     const playerOpts = getPlayerOpts(this.props);
 
@@ -58,14 +58,14 @@ class ReactJWPlayer extends Component {
   }
 
   render() {
+    /* eslint-disable */
     return (
       <div
         className={this.props.className}
-        dangerouslySetInnerHTML={{
-          __html: `<div id="${this.props.playerId}"></div>`,
-        }}
+        dangerouslySetInnerHTML={{ __html: `<div id="${this.props.playerId}"></div>` }}
       />
     );
+    /* eslint-enable */
   }
 }
 
