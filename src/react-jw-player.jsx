@@ -62,7 +62,7 @@ class ReactJWPlayer extends Component {
       <div
         className={this.props.className}
         dangerouslySetInnerHTML={{
-          __html: `<div id="${this.props.playerId}"></div>`,
+          __html: `<div id="jw-${this.props.playerId}"></div>`,
         }}
       />
     );
